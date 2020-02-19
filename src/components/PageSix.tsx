@@ -3,7 +3,6 @@ import React from 'react';
 import styled from 'styled-components';
 import DatePicker from "./DatePicker";
 import TextField from "@material-ui/core/TextField";
-import IconButton from "@material-ui/core/IconButton";
 
 const WizardFormWrap = styled.div`
     h1 {
@@ -53,24 +52,24 @@ const formatDate = (date: any) => {
 }
 
 
-const PageSix = ({nextPage,prevPage, months, birthDate, requestToBack}: any) => {
+const PageSix = ({nextPage,prevPage, months, birthDate, requestToBack, setRequestToBack}: any) => {
     const birthDateArray = birthDate.split('.');
     const [Periods, setPeriods] = React.useState({
-        LeavePercentage: null,
+        LeavePercentage: 0,
         StartDate: new Date(birthDateArray[2],birthDateArray[1],birthDateArray[0]),
         EndDate:  new Date(birthDateArray[2], parseInt(birthDateArray[1]) + months,birthDateArray[0]),
     });
 
     const onSubmit = () => {
-        console.log({
+        setRequestToBack({
             ...requestToBack,
-            Periods: {
-                LeavePercentage: Periods.LeavePercentage,
+            Periods:[{
+                LeavePercentage:  Periods.LeavePercentage,
                 StartDate: formatDate(Periods.StartDate),
                 EndDate: formatDate(Periods.EndDate),
-            }
+            }]
         });
-
+        nextPage();
     }
     return (
         <WizardFormWrap>
@@ -86,7 +85,7 @@ const PageSix = ({nextPage,prevPage, months, birthDate, requestToBack}: any) => 
                         <DatePickerWrap>
                             <DatePicker label={'Start'} onChange={(val: any) => setPeriods({...Periods,StartDate: val})} disabled default={Periods.StartDate}/>
                             <DatePicker label={'End'} onChange={(val: any) => setPeriods({...Periods,EndDate: val})} default={Periods.EndDate}/>
-                            <TextField onChange={(val: any) => setPeriods({...Periods,LeavePercentage: val.target.value})} label="Percent" />
+                            <TextField onChange={(val: any) => setPeriods({...Periods,LeavePercentage: parseInt(val.target.value)})} label="Percent" />
                             {/*<IconButton aria-label="add">*/}
                             {/*    <AddIcon />*/}
                             {/*</IconButton>*/}

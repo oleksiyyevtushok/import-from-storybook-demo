@@ -55,7 +55,7 @@ const PageFour = ({nextPage, prevPage, queryResults, requestToBack, setRequestTo
     const [WorkingType, setWorkingType] = React.useState<string | null>(null);
     const [IsFullTimeEducation, setFullTimeEducation] = React.useState<boolean | string>('noData');
     const [HasLegalDomicile, setHasLegalDomicile] = React.useState<boolean>(false);
-    console.log('IsFullTimeEducation', IsFullTimeEducation)
+
     const onSubmit = () => {
         if(!IsFullTimeEducation && !HasLegalDomicile){
             setError(true);
@@ -63,7 +63,7 @@ const PageFour = ({nextPage, prevPage, queryResults, requestToBack, setRequestTo
             setRequestToBack({
                 ...requestToBack,
                 SSN,
-                WorkingType: HasIncomes ? WorkingType : HasLegalDomicile ? 'OutOfLabour' : 'Education'
+                WorkingType: HasIncomes ? WorkingType : HasLegalDomicile ? 'OutOfLabor' : 'Education'
             });
             nextPage();
         }

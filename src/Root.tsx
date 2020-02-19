@@ -9,6 +9,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient } from "apollo-client";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap'
+import PageResults from "./components/PageResults";
 import PageSix from "./components/PageSix";
 import PageTwo from "./components/PageTwo";
 import PageThree from "./components/PageThree";
@@ -49,8 +50,7 @@ const Root = () => {
         PensionSavings: null,
         PersonalDiscount: null,
         Periods: null
-    })
-    console.log(requestToBack);
+    });
 
     const nextPage = () => {
         setPage(page + 1);
@@ -112,7 +112,12 @@ const Root = () => {
                                 prevPage={prevPage}
                                 months={months}
                                 requestToBack={requestToBack}
+                                setRequestToBack={setRequestToBack}
                                 birthDate={queryResults.ChildEstimateBirthDate}
+                            />}
+                            {page === 7 &&
+                            <PageResults
+                                requestToBack={requestToBack}
                             />}
                         </Col>
                         <NavCol md={4} sm={0}><Navigation page={page}/></NavCol>
