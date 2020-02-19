@@ -51,7 +51,7 @@ const PageTwo = ({nextPage, prevPage, setCalculations}: any) => {
                             withIcon
                             iconColor={'darkorange'}
                             placeholder={'Enter your SSN...'}
-                            header={'To calculate fill the input please.'}
+                            header={'To calculate fill your SSN.'}
                             onChange={onChange}
                         /></StyledFormInput>
                         <ButtonGroup>

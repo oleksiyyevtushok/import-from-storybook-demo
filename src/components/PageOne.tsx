@@ -23,13 +23,12 @@ const PageOne = ({nextPage}: any) => {
     return (
         <WizardFormWrap>
             <WizardForm
-                header={'Welcome to the bla bla bla application'}
+                header={'Welcome to the Maternity Leave Application'}
                 nextButtonClick={nextPage}
                 nextButtonText={'Next'}
                 child={
                     <div>
-                        <Paragraph>{loremIpsum}</Paragraph>
-                        <Paragraph>Blalbl fdsfdsll fsdfdslfls sdlfdls flsdfl</Paragraph>
+                        <Paragraph>Check if you can get leave or pay when you have a child</Paragraph>
                     </div>
                 }/>
         </WizardFormWrap>

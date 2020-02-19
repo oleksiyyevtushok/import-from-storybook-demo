@@ -118,6 +118,7 @@ const Root = () => {
                             {page === 7 &&
                             <PageResults
                                 requestToBack={requestToBack}
+                                homePage={homePage}
                             />}
                         </Col>
                         <NavCol md={4} sm={0}><Navigation page={page}/></NavCol>

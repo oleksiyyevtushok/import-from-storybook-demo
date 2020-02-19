@@ -16,19 +16,19 @@ const Navitems = [
     },
     {
         value: 4,
-        label: 'Questions'
+        label: 'Additional info'
     },
     {
         value: 5,
-        label: 'Months amount'
+        label: 'Payment period'
     },
     {
         value: 6,
-        label: 'Maternity period'
+        label: 'Maternity plan'
     },
     {
         value: 7,
-        label: 'Result'
+        label: 'Summary'
     }
 ];
 

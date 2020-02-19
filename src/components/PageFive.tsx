@@ -41,7 +41,7 @@ const PageFive = ({nextPage, prevPage, setMon}: any) => {
     return (
         <WizardFormWrap>
             <WizardForm
-                header={'Choose month amount'}
+                header={'Payment period'}
                 nextButtonClick={onSubmit}
                 nextButtonText={'Next'}
                 backButtonClick={prevPage}

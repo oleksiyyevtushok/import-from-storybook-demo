@@ -39,6 +39,7 @@ const DatePickerWrap = styled.div`
 
 const Paragraph = styled.p`
     font-size: 18px;
+    margin-top: 20px;
     margin-bottom: 20px;
     color: rgb(12,149,176)
 `;
@@ -74,7 +75,7 @@ const PageSix = ({nextPage,prevPage, months, birthDate, requestToBack, setReques
     return (
         <WizardFormWrap>
             <WizardForm
-                header={'Choose month amount'}
+                header={'Maternity leave plan'}
                 nextButtonClick={onSubmit}
                 nextButtonText={'Next'}
                 backButtonClick={prevPage}
@@ -85,7 +86,7 @@ const PageSix = ({nextPage,prevPage, months, birthDate, requestToBack, setReques
                         <DatePickerWrap>
                             <DatePicker label={'Start'} onChange={(val: any) => setPeriods({...Periods,StartDate: val})} disabled default={Periods.StartDate}/>
                             <DatePicker label={'End'} onChange={(val: any) => setPeriods({...Periods,EndDate: val})} default={Periods.EndDate}/>
-                            <TextField onChange={(val: any) => setPeriods({...Periods,LeavePercentage: parseInt(val.target.value)})} label="Percent" />
+                            <TextField value={100} onChange={(val: any) => setPeriods({...Periods,LeavePercentage: parseInt(val.target.value)})} label="Percent" />
                             {/*<IconButton aria-label="add">*/}
                             {/*    <AddIcon />*/}
                             {/*</IconButton>*/}
