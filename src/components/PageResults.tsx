@@ -54,10 +54,10 @@ const PageResults = ({homePage,requestToBack}: any) => {
                                     {!!item.AmountNet &&<ItemGroup>Amount Net: <ItemValue>{item.AmountNet.toFixed(2)} kr.</ItemValue></ItemGroup>}
                                     {!!item.AmountGross &&<ItemGroup>Amount Gross: <ItemValue>{item.AmountGross.toFixed(2)} kr.</ItemValue></ItemGroup>}
                                     {!!item.PensionFond &&<ItemGroup>Pension Fond: <ItemValue>{item.PensionFond.toFixed(2)} kr.</ItemValue></ItemGroup>}
-                                    {!!item.PensionSavings &&<ItemGroup>Pension savings: <ItemValue>{item.PensionSavings.toFixed(2)} kr.</ItemValue></ItemGroup>}
+                                    {!!item.PensionSavings &&<ItemGroup>Pension Savings: <ItemValue>{item.PensionSavings.toFixed(2)} kr.</ItemValue></ItemGroup>}
                                     <hr/>
-                                    {!!item.Tax.Total &&<ItemGroup>Total tax: <ItemValue>{item.Tax.Total.toFixed(2)} kr.</ItemValue></ItemGroup>}
-                                    {!!item.Tax.RateSelected &&<ItemGroup>RateSelected: <ItemValue>{item.Tax.RateSelected} %</ItemValue></ItemGroup>}
+                                    {!!item.Tax.Total &&<ItemGroup>Total Tax: <ItemValue>{item.Tax.Total.toFixed(2)} kr.</ItemValue></ItemGroup>}
+                                    {!!item.Tax.RateSelected &&<ItemGroup>Rate Selected: <ItemValue>{item.Tax.RateSelected} %</ItemValue></ItemGroup>}
                                     {!!item.Tax.Discount && <ItemGroup>Discount: <ItemValue>{item.Tax.Discount} kr.</ItemValue></ItemGroup>}
                                 </>
                             ))}
