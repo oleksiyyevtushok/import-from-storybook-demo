@@ -56,3 +56,36 @@ export const getResult = ({
       }
 }
 `;
+
+export const test = ({
+                  SSN,
+                  WorkingType,
+                  PensionSavings,
+                  PersonalDiscount,
+                  Periods
+              }: ReqProps) =>`
+    query {
+      calculateFinalAmount(calcRequest :{
+        SSN : "${SSN}",
+        WorkingType: "${WorkingType}",
+        PensionSavings: ${PensionSavings},
+        PersonalDiscount: ${PersonalDiscount},
+        Periods: ${JSON.stringify(Periods).replace(/\"([^(\")"]+)\":/g, "$1:")}
+      }) {
+        SSN,
+        Periods {
+          StartDate,
+          EndDate,
+          AmountNet,
+          AmountGross,
+          PensionFond,
+          PensionSavings,
+          Tax {
+            Total,
+            RateSelected,
+            Discount
+          }
+        }
+      }
+}
+`
