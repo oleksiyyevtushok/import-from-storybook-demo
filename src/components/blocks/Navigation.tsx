@@ -1,38 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { navItems as Navitems } from '../../constants/defaultValues';
 
-const Navitems = [
-    {
-        value: 1,
-        label: 'Welcome'
-    },
-    {
-        value: 2,
-        label: 'SSN'
-    },
-    {
-        value: 3,
-        label: 'Your information'
-    },
-    {
-        value: 4,
-        label: 'Additional info'
-    },
-    {
-        value: 5,
-        label: 'Payment period'
-    },
-    {
-        value: 6,
-        label: 'Maternity plan'
-    },
-    {
-        value: 7,
-        label: 'Summary'
-    }
-];
-
-const StatusWrap = styled.span<{pageStatus: string, last?: boolean}>`
+const StatusWrap = styled.span<{ pageStatus: string, last?: boolean }>`
     position:relative;
     font-size: 20px;
     padding: 10px 20px;
@@ -67,7 +37,7 @@ const StatusWrap = styled.span<{pageStatus: string, last?: boolean}>`
     `}
 `;
 
-const LabelWrap = styled.span<{pageStatus: string}>`
+const LabelWrap = styled.span<{ pageStatus: string }>`
     color: rgb(12,149,176);
     padding-left: 20px;
     font-size: 23px;
@@ -88,27 +58,28 @@ const ListWrap = styled.ul`
     }
 `;
 
-const NavigationWrap = styled.div`
-`;
-
 const getPageStatus = (val: number, page: number) => {
     return val === page ? 'current'
         : val > page ? 'next'
-        : 'prev';
+            : 'prev';
 }
 
 const Navigation = ({page}: any) => {
     return (
-        <NavigationWrap>
+        <>
             <ListWrap>
                 {Navitems.map((navItem: any) => (
                     <li key={navItem.value}>
-                        <StatusWrap last={navItem.value === Navitems.length} pageStatus={getPageStatus(navItem.value,page)}>{navItem.value}</StatusWrap>
-                        <LabelWrap pageStatus={getPageStatus(navItem.value,page)}>{navItem.label}</LabelWrap>
+                        <StatusWrap
+                            last={navItem.value === Navitems.length}
+                            pageStatus={getPageStatus(navItem.value, page)}>
+                            {navItem.value}
+                        </StatusWrap>
+                        <LabelWrap pageStatus={getPageStatus(navItem.value, page)}>{navItem.label}</LabelWrap>
                     </li>
                 ))}
             </ListWrap>
-        </NavigationWrap>
+        </>
     );
 }
 

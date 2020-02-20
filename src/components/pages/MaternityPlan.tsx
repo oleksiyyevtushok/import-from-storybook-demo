@@ -1,27 +1,14 @@
 import WizardForm from "@itera-storybook/wizard-form/lib/WizzardForm/src/WizardForm";
 import { Button } from "@material-ui/core";
-import Radio from "@material-ui/core/Radio";
 import withStyles from "@material-ui/core/styles/withStyles";
 import React from 'react';
 import styled from 'styled-components';
-import DatePicker from "./DatePicker";
+import { overrideMaterialToOrange, WizardFormWrap } from "../../constants/globalStyledComponents";
+import { BackEndRequest, EventClickType, PeriodsProps } from "../../types/general";
+import DatePicker from "../blocks/DatePicker";
 import TextField from "@material-ui/core/TextField";
 
-declare interface PeriodsProps {
-    LeavePercentage: number,
-    StartDate: Date,
-    EndDate: Date | null,
-}
-
-const WizardFormWrap = styled.div`
-    h1 {
-        font-size: 50px;
-    }
-    h2 {
-        font-size: 50px;
-        margin-bottom: 20px;
-        color: rgb(12, 149, 176);
-    }
+const WizardWrap = styled(WizardFormWrap)`
     div {
         margin-top: 0;
         margin-bottom: 10px;
@@ -32,18 +19,7 @@ const WizardFormWrap = styled.div`
 const DatePickerWrap = styled.div`
     display: flex;
     align-items: baseline;
-    .MuiGrid-container {
-        width: auto !important;
-    }
-    .MuiInput-underline:before {
-        border-bottom: 1px solid darkorange !important;
-    }
-    .MuiInput-underline:after {
-        border-bottom: 2px solid darkorange !important;
-    }
-    .Mui-focused {
-        color: darkorange !important;
-    }
+    ${overrideMaterialToOrange}
 `;
 
 const Paragraph = styled.p`
@@ -51,6 +27,7 @@ const Paragraph = styled.p`
     margin-top: 20px;
     margin-bottom: 20px;
     color: rgb(12,149,176)
+    font-weight: bold;
 `;
 
 const ButtonStyled = withStyles({
@@ -63,17 +40,17 @@ const ButtonStyled = withStyles({
     },
 })(Button);
 
-const formatDate = (date: any) => {
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
+declare interface MaternityPlanProps {
+    nextPage: () => void,
+    prevPage: () => void,
+    months: number,
+    birthDate: string,
+    setRequestToBack: (i: BackEndRequest) => void,
+    requestToBack: BackEndRequest
+};
 
-    return day + '.' + month + '.' + year;
-}
-
-
-const PageSix = ({nextPage, prevPage, months, birthDate, requestToBack, setRequestToBack}: any) => {
-    const birthDateArray: number[] & string[] = birthDate.split('.');
+const MaternityPlan = ({nextPage, prevPage, months, birthDate, requestToBack, setRequestToBack}: MaternityPlanProps) => {
+    const birthDateArray: any[] = birthDate.split('.');
 
     const firstPeriodStart: Date = new Date(birthDateArray[2], birthDateArray[1], birthDateArray[0]);
     const firstPeriodEnd: Date = new Date(birthDateArray[2], parseInt(birthDateArray[1]) + months, birthDateArray[0]);
@@ -126,10 +103,10 @@ const PageSix = ({nextPage, prevPage, months, birthDate, requestToBack, setReque
         } else {
             toggleExpand(true);
         }
-    }
+    };
 
     return (
-        <WizardFormWrap>
+        <WizardWrap>
             <WizardForm
                 header={'Maternity leave plan'}
                 nextButtonClick={onSubmit}
@@ -138,7 +115,7 @@ const PageSix = ({nextPage, prevPage, months, birthDate, requestToBack, setReque
                 backButtonText={'Back'}
                 child={
                     <div>
-                        <Paragraph style={{fontWeight: 'bold'}}>Period 1.</Paragraph>
+                        <Paragraph>Period 1.</Paragraph>
                         <DatePickerWrap>
                             <DatePicker
                                 disabled
@@ -149,11 +126,11 @@ const PageSix = ({nextPage, prevPage, months, birthDate, requestToBack, setReque
                             <DatePicker
                                 label={'End'}
                                 default={FirstPeriod.EndDate}
-                                onChange={(val: any) => SetFirstPeriod({...FirstPeriod, EndDate: val})}
+                                onChange={(val: Date) => SetFirstPeriod({...FirstPeriod, EndDate: val})}
                             />
                             <TextField
                                 label="Percent"
-                                onChange={(val: any) => SetFirstPeriod({
+                                onChange={(val: EventClickType) => SetFirstPeriod({
                                     ...FirstPeriod,
                                     LeavePercentage: parseInt(val.target.value)
                                 })}
@@ -167,20 +144,20 @@ const PageSix = ({nextPage, prevPage, months, birthDate, requestToBack, setReque
                         </ButtonStyled>
                         {expandPeriods &&
                         <>
-                            <Paragraph style={{fontWeight: 'bold'}}>Period 2.</Paragraph>
+                            <Paragraph>Period 2.</Paragraph>
                             <DatePickerWrap>
                                 <DatePicker
                                     label={'Start'}
-                                    onChange={(val: any) => SetSecondPeriod({...SecondPeriod, StartDate: val})}
+                                    onChange={(val: Date) => SetSecondPeriod({...SecondPeriod, StartDate: val})}
                                     default={SecondPeriod.StartDate}
                                 />
                                 <DatePicker label={'End'}
-                                            onChange={(val: any) => SetSecondPeriod({...SecondPeriod, EndDate: val})}
+                                            onChange={(val: Date) => SetSecondPeriod({...SecondPeriod, EndDate: val})}
                                             default={SecondPeriod.EndDate}
                                 />
                                 <TextField
                                     label="Percent"
-                                    onChange={(val: any) => SetSecondPeriod({
+                                    onChange={(val: EventClickType) => SetSecondPeriod({
                                         ...SecondPeriod,
                                         LeavePercentage: parseInt(val.target.value)
                                     })}
@@ -189,8 +166,8 @@ const PageSix = ({nextPage, prevPage, months, birthDate, requestToBack, setReque
                         </>}
                     </div>
                 }/>
-        </WizardFormWrap>
+        </WizardWrap>
     );
-}
+};
 
-export default PageSix;
+export default MaternityPlan;

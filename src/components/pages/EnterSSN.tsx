@@ -4,23 +4,19 @@ import Form from "@itera-storybook/form/lib/Form";
 import FormInput from "@itera-storybook/input/lib/FormInput";
 import React from 'react';
 import styled from 'styled-components';
-
+import { EventClickType } from "../../types/general";
 
 const ButtonGroup = styled.div`
     display: flex;
     justify-content: center;
-    
-    button {
-        border: none;
-    }
-`
+`;
 
 const IsDisabled = styled.span<{ disabled?: boolean }>`
     ${({disabled}) => disabled && `
         pointer-events:none;
         opacity: 0.7;
     `}
-`
+`;
 
 const StyledFormInput = styled.div`
   @media (max-width: 950px) {
@@ -28,19 +24,24 @@ const StyledFormInput = styled.div`
         width: 90%;
     }
   }
+`;
 
-`
+declare interface EnterSSNProps {
+    nextPage: () => void,
+    prevPage: () => void,
+    setSSNValue: (val: string) => void,
+}
 
-
-const PageTwo = ({nextPage, prevPage, setCalculations}: any) => {
-    const [ssn, setSSN] = React.useState('');
-    const onChange = (e: any) => {
+const EnterSSN = ({nextPage, prevPage, setSSNValue}: EnterSSNProps) => {
+    const [ssn, setSSN] = React.useState<string>('');
+    const onChange = (e: EventClickType) => {
         setSSN(e.target.value);
-    }
+    };
     const onSubmit = () => {
         nextPage();
-        setCalculations(ssn);
-    }
+        setSSNValue(ssn);
+    };
+
     return (
         <div>
             <Form
@@ -69,4 +70,4 @@ const PageTwo = ({nextPage, prevPage, setCalculations}: any) => {
     );
 }
 
-export default PageTwo;
+export default EnterSSN;

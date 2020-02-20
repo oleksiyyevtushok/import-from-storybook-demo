@@ -2,20 +2,12 @@ import WizardForm from "@itera-storybook/wizard-form/lib/WizzardForm/src/WizardF
 import Range from "@itera-storybook/range/lib/Range";
 import React from 'react';
 import styled from 'styled-components';
-
-const WizardFormWrap = styled.div`
-    h1 {
-        font-size: 50px;
-    }
-    h2 {
-        font-size: 50px;
-        margin-bottom: 20px;
-        color: rgb(12, 149, 176);
-    }
-`;
+import { WizardFormWrap } from "../../constants/globalStyledComponents";
+import { EventClickType } from "../../types/general";
 
 const Paragraph = styled.p`
     font-size: 18px;
+    fontWeight: 'bold'
 `;
 
 const RangeWrapper = styled.div`
@@ -31,9 +23,15 @@ const RangeWrapper = styled.div`
     }
 `;
 
+declare interface PaymentPeriodProps {
+    nextPage: () => void,
+    prevPage: () => void,
+    setMon: (i: number) => void,
+}
 
-const PageFive = ({nextPage, prevPage, setMon}: any) => {
-    const [month, setMonth] = React.useState(1);
+
+const PaymentPeriod = ({nextPage, prevPage, setMon}: PaymentPeriodProps) => {
+    const [month, setMonth] = React.useState<number>(1);
     const onSubmit = () => {
         setMon(month)
         nextPage();
@@ -48,9 +46,9 @@ const PageFive = ({nextPage, prevPage, setMon}: any) => {
                 backButtonText={'Back'}
                 child={
                     <div>
-                        <Paragraph style={{fontWeight: 'bold'}}>You are able to choose period up to 6 months.</Paragraph>
+                        <Paragraph>You are able to choose period up to 6 months.</Paragraph>
                         <RangeWrapper>
-                            <Range onChange={(e: any, val: number) => setMonth(val)} max={6} />
+                            <Range onChange={(e: EventClickType, val: number) => setMonth(val)} max={6} />
                         </RangeWrapper>
                     </div>
                 }/>
@@ -58,4 +56,4 @@ const PageFive = ({nextPage, prevPage, setMon}: any) => {
     );
 }
 
-export default PageFive;
+export default PaymentPeriod;

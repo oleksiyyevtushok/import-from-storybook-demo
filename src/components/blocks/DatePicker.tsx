@@ -7,10 +7,9 @@ import {
     KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-
-
+// Settings of material-ui comp
 export default function MaterialUIPickers(props: any) {
-    // The first commit of Material-UI
+
     const [selectedDate, setSelectedDate] = React.useState<any>(props.default)
 
     const handleDateChange = (date: any) => {

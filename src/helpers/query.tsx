@@ -1,11 +1,17 @@
 import gql from "graphql-tag";
 
+declare interface PeriodsProps {
+    LeavePercentage: number,
+    StartDate: Date,
+    EndDate: Date | null,
+}
+
 declare interface ReqProps {
     SSN: number,
     WorkingType: string,
     PensionSavings: number,
     PersonalDiscount: number,
-    Periods: any[]
+    Periods: PeriodsProps[]
 }
 
 export const getSSNQuery = (SSN: string) => gql`
@@ -25,19 +31,19 @@ export const getSSNQuery = (SSN: string) => gql`
 `;
 
 export const getResult = ({
-      SSN,
-      WorkingType,
-      PensionSavings,
-      PersonalDiscount,
-      Periods
-  }: ReqProps) => gql`
+                              SSN,
+                              WorkingType,
+                              PensionSavings,
+                              PersonalDiscount,
+                              Periods
+                          }: ReqProps) => gql`
     query {
       calculateFinalAmount(calcRequest :{
         SSN : "${SSN}",
         WorkingType: "${WorkingType}",
         PensionSavings: ${PensionSavings},
         PersonalDiscount: ${PersonalDiscount},
-        Periods: ${JSON.stringify(Periods).replace(/\"([^(\")"]+)\":/g, "$1:")}
+        Periods: ${JSON.stringify(Periods).replace(/"([^(")"]+)":/g, "$1:")}
       }) {
         SSN,
         Periods {
@@ -56,36 +62,3 @@ export const getResult = ({
       }
 }
 `;
-
-export const test = ({
-                  SSN,
-                  WorkingType,
-                  PensionSavings,
-                  PersonalDiscount,
-                  Periods
-              }: ReqProps) =>`
-    query {
-      calculateFinalAmount(calcRequest :{
-        SSN : "${SSN}",
-        WorkingType: "${WorkingType}",
-        PensionSavings: ${PensionSavings},
-        PersonalDiscount: ${PersonalDiscount},
-        Periods: ${JSON.stringify(Periods).replace(/\"([^(\")"]+)\":/g, "$1:")}
-      }) {
-        SSN,
-        Periods {
-          StartDate,
-          EndDate,
-          AmountNet,
-          AmountGross,
-          PensionFond,
-          PensionSavings,
-          Tax {
-            Total,
-            RateSelected,
-            Discount
-          }
-        }
-      }
-}
-`

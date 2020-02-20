@@ -1,3 +1,18 @@
+/* Overrides Material-ui components */
+
 body .MuiPickersDay-daySelected {
     background-color: darkorange !important;
 }
+body .MuiGrid-container {
+    width: auto !important;
+}
+body .MuiInput-underline:before {
+    border-bottom: 1px solid rgb(12, 149, 176) !important;
+}
+body .MuiInput-underline:after {
+    border-bottom: 2px solid rgb(12, 149, 176) !important;
+}
+body .Mui-focused {
+    color: rgb(12, 149, 176) !important;
+}
+
