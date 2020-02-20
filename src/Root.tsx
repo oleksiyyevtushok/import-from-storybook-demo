@@ -1,5 +1,6 @@
 import { InMemoryCache, NormalizedCacheObject } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
+import './App.css';
 import React from 'react';
 import styled from "styled-components";
 import PageError from "./components/PageError";
@@ -51,6 +52,8 @@ const Root = () => {
         PersonalDiscount: null,
         Periods: null
     });
+    console.log('aa', queryResults);
+    console.log(requestToBack);
 
     const nextPage = () => {
         setPage(page + 1);
